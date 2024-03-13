@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 25.0.1706.9
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test-praxedes-backend-api", "test-praxedes-backend-api\test-praxedes-backend-api.csproj", "{F4817D37-1634-4C74-AE9A-A90F562EF238}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F4817D37-1634-4C74-AE9A-A90F562EF238}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4817D37-1634-4C74-AE9A-A90F562EF238}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4817D37-1634-4C74-AE9A-A90F562EF238}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4817D37-1634-4C74-AE9A-A90F562EF238}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7EF000E8-809B-46CA-865B-7A8D53556DE5}
+	EndGlobalSection
+EndGlobal

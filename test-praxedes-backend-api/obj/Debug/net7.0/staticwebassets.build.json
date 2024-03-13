@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "seGXbNzqG/ELfqs+HSwf+IGB28Gr1lKr5hfQgZ1u7H0=",
+  "Source": "test-praxedes-backend-api",
+  "BasePath": "_content/test-praxedes-backend-api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
