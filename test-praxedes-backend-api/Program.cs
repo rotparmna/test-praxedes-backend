@@ -11,6 +11,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddSingleton(serviceProvider =>
+{
+    var configuration = serviceProvider.GetRequiredService<IConfiguration>();
+    var connectionString = configuration.GetConnectionString("DefaultConnection") ??
+                            throw new ApplicationException("Connection string is null");
+    return new SqlConnectionFactory(connectionString);
+});
 builder.Services.AddTransient<IFamilyGroupService, FamilyGroupService>();
 builder.Services.AddTransient<ISpGetFamilyGroup, SpGetFamilyGroup>();
 
