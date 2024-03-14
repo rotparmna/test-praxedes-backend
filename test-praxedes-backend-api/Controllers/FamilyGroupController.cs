@@ -2,8 +2,6 @@
 using test_praxedes_backend_api.Contracts;
 using test_praxedes_backend_api.Dto;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace test_praxedes_backend_api.Controllers
 {
     [ApiController]
