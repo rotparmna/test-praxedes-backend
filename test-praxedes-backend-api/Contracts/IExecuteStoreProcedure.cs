@@ -3,6 +3,7 @@
 	public interface IExecuteStoreProcedure<T, R>
 	{
         T Execute(R input);
+        T Execute();
     }
 }
 

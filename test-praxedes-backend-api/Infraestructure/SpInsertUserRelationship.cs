@@ -25,6 +25,11 @@ namespace test_praxedes_backend_api.Infraestructure
                 },
                 commandType: CommandType.StoredProcedure);
         }
+
+        public Task Execute()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

@@ -5,7 +5,7 @@ using test_praxedes_backend_api.Models;
 
 namespace test_praxedes_backend_api.Infraestructure
 {
-	public class SpInsertUser: ISpInsertUser
+    public class SpInsertUser : ISpInsertUser
     {
         private readonly SqlConnectionFactory connection;
 
@@ -26,6 +26,11 @@ namespace test_praxedes_backend_api.Infraestructure
                     user.Birthdate
                 },
                 commandType: CommandType.StoredProcedure));
+        }
+
+        public Task<int> Execute()
+        {
+            throw new NotImplementedException();
         }
     }
 }
