@@ -23,6 +23,10 @@ builder.Services.AddTransient<ISpGetFamilyGroup, SpGetFamilyGroup>();
 builder.Services.AddTransient<ISpGetUser, SpGetUser>();
 builder.Services.AddTransient<ISpInsertUser, SpInsertUser>();
 builder.Services.AddTransient<ISpInsertUserRelationship, SpInsertUserRelationship>();
+builder.Services.AddTransient<ISpDeleteUser, SpDeleteUser>();
+builder.Services.AddTransient<ISpGetUserById, SpGetUserById>();
+builder.Services.AddTransient<ISpGetUsers, SpGetUsers>();
+builder.Services.AddTransient<ISpUpdateUser, SpUpdateUser>();
 
 var app = builder.Build();
 
