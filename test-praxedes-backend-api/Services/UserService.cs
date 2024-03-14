@@ -12,18 +12,21 @@ namespace test_praxedes_backend_api.Services
         private readonly ISpInsertUser spInsertUser;
         private readonly ISpDeleteUser spDeleteUser;
         private readonly ISpUpdateUser spUpdateUser;
+        private readonly ILogger<UserService> logger;
 
         public UserService(ISpGetUserById spGetUserById,
             ISpGetUsers spGetUsers,
             ISpInsertUser spInsertUser,
             ISpDeleteUser spDeleteUser,
-            ISpUpdateUser spUpdateUser)
+            ISpUpdateUser spUpdateUser,
+            ILogger<UserService> logger)
 		{
             this.spGetUserById = spGetUserById;
             this.spGetUsers = spGetUsers;
             this.spInsertUser = spInsertUser;
             this.spDeleteUser = spDeleteUser;
             this.spUpdateUser = spUpdateUser;
+            this.logger = logger;
         }
 
         public async Task<bool> CreateUser(User user)
@@ -35,12 +38,12 @@ namespace test_praxedes_backend_api.Services
             }
             catch(UniqueConstraintException ex)
             {
-                //log
+                logger.LogError(ex, "Se intentó crear un usuario con un numero de documento existente, número de documento " + user.DocumentNumber);
                 return false;
             }
             catch(SqlException sqlEx)
             {
-                //log
+                logger.LogError(sqlEx, "Error inesperado en la creación del usuario, número de documento " + user.DocumentNumber);
                 return false;
             }
         }
