@@ -1,6 +1,6 @@
 ﻿namespace test_praxedes_backend_api.Dto
 {
-	public class FamilyGroupDto
+	public class GetFamilyGroupDto
 	{
         public int UserId { get; set; }
         public string DocumentNumber { get; set; }

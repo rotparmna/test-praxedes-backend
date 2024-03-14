@@ -18,16 +18,17 @@ namespace test_praxedes_backend_api.Controllers
         }
 
         [HttpGet]
+        [Route("getByParent")]
         public async Task<IResult> GetFamilyGroups(int? idUser)
         {
             if (!idUser.HasValue)
                 return Results.BadRequest();
 
-            var familyGroupDto = new List<FamilyGroupDto>();
+            var familyGroupDto = new List<GetFamilyGroupDto>();
             var familyGroup = await this.familyGroupService.GetFamilyGroups(idUser.Value);
             familyGroup.ForEach(x =>
             {
-                familyGroupDto.Add(new FamilyGroupDto()
+                familyGroupDto.Add(new GetFamilyGroupDto()
                 {
                     UserId = x.UserChild.UserId,
                     DocumentNumber = x.UserChild.DocumentNumber,
@@ -41,6 +42,16 @@ namespace test_praxedes_backend_api.Controllers
             });
 
             return Results.Ok(familyGroupDto);
+        }
+
+        [HttpPost]
+        [Route("addByParent")]
+        public async Task<IResult> SaveFamilyGroup([FromQuery] int? idUser, [FromForm]AddFamilyGroupDto familyGroup)
+        {
+            if (!idUser.HasValue)
+                return Results.BadRequest();
+
+            return Results.Ok(true);
         }
     }
 }
