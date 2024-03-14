@@ -46,12 +46,31 @@ namespace test_praxedes_backend_api.Controllers
 
         [HttpPost]
         [Route("addByParent")]
-        public async Task<IResult> SaveFamilyGroup([FromQuery] int? idUser, [FromForm]AddFamilyGroupDto familyGroup)
+        public async Task<IResult> SaveFamilyGroup([FromQuery] int? idUserParent, [FromForm]AddFamilyGroupDto familyGroup)
         {
-            if (!idUser.HasValue)
+            if (!idUserParent.HasValue)
                 return Results.BadRequest();
 
-            return Results.Ok(true);
+            await familyGroupService.Add(idUserParent.Value,
+                new Models.FamilyGroup()
+                {
+                    Relationship = familyGroup.Relationship,
+                    UserParent = new()
+                    {
+                        UserId=idUserParent.Value
+                    },
+                    UserChild = new()
+                    {
+                        UserId = familyGroup.User.UserId,
+                        Names = familyGroup.User.Names,
+                        LastName = familyGroup.User.LastName,
+                        Gender = familyGroup.User.Gender,
+                        Birthdate = familyGroup.User.Birthdate,
+                        DocumentNumber = familyGroup.User.DocumentNumber
+                    }
+                });
+
+            return Results.Ok();
         }
     }
 }

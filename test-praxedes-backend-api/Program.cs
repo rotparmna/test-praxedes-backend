@@ -20,6 +20,9 @@ builder.Services.AddSingleton(serviceProvider =>
 });
 builder.Services.AddTransient<IFamilyGroupService, FamilyGroupService>();
 builder.Services.AddTransient<ISpGetFamilyGroup, SpGetFamilyGroup>();
+builder.Services.AddTransient<ISpGetUser, SpGetUser>();
+builder.Services.AddTransient<ISpInsertUser, SpInsertUser>();
+builder.Services.AddTransient<ISpInsertUserRelationship, SpInsertUserRelationship>();
 
 var app = builder.Build();
 
