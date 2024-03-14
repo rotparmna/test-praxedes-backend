@@ -33,7 +33,7 @@ namespace test_praxedes_backend_api.Controllers
         [HttpPost]
         public async Task<IResult> CreateUser([FromForm]UserDto user)
         {
-            await userService.CreateUser(new()
+            bool success = await userService.CreateUser(new()
             {
                 Names = user.Names,
                 LastName = user.LastName,
@@ -41,6 +41,12 @@ namespace test_praxedes_backend_api.Controllers
                 Gender = user.Gender,
                 DocumentNumber = user.DocumentNumber
             });
+
+            if (!success)
+                return Results.BadRequest(new ResultDto()
+                {
+                    Message = "Los datos ingresados no son correctos."
+                });
 
             return Results.Ok();
         }

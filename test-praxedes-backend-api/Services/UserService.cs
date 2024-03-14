@@ -1,4 +1,6 @@
-﻿using test_praxedes_backend_api.Contracts;
+﻿using Microsoft.Data.SqlClient;
+using test_praxedes_backend_api.Contracts;
+using test_praxedes_backend_api.Exceptions;
 using test_praxedes_backend_api.Models;
 
 namespace test_praxedes_backend_api.Services
@@ -24,9 +26,23 @@ namespace test_praxedes_backend_api.Services
             this.spUpdateUser = spUpdateUser;
         }
 
-        public async Task CreateUser(User user)
+        public async Task<bool> CreateUser(User user)
         {
-            await spInsertUser.Execute(user);
+            try
+            {
+                await spInsertUser.Execute(user);
+                return true;
+            }
+            catch(UniqueConstraintException ex)
+            {
+                //log
+                return false;
+            }
+            catch(SqlException sqlEx)
+            {
+                //log
+                return false;
+            }
         }
 
         public async Task<User> GetUserById(int idUser)

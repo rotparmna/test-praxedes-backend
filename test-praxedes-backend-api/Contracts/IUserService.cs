@@ -6,7 +6,7 @@ namespace test_praxedes_backend_api.Contracts
 	{
 		Task<List<User>> GetUsers();
         Task<User> GetUserById(int idUser);
-		Task CreateUser(User user);
+		Task<bool> CreateUser(User user);
 		Task RemoveUser(int idUser);
         Task UpdateUser(User user);
     }

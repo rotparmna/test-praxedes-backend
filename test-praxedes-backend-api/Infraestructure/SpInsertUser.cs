@@ -1,6 +1,8 @@
 ﻿using Dapper;
+using Microsoft.Data.SqlClient;
 using System.Data;
 using test_praxedes_backend_api.Contracts;
+using test_praxedes_backend_api.Exceptions;
 using test_praxedes_backend_api.Models;
 
 namespace test_praxedes_backend_api.Infraestructure
@@ -16,16 +18,31 @@ namespace test_praxedes_backend_api.Infraestructure
 
         public async Task<int> Execute(User user)
         {
-            return (await connection.Create().ExecuteScalarAsync<int>("spInsertUserRelationship",
-                new
+            try
+            {
+                return (await connection.Create().ExecuteScalarAsync<int>("spInsertUser",
+                    new
+                    {
+                        user.DocumentNumber,
+                        user.Names,
+                        user.LastName,
+                        user.Gender,
+                        user.Birthdate,
+                        user.UserId
+                    },
+                    commandType: CommandType.StoredProcedure));
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 2627) 
                 {
-                    user.DocumentNumber,
-                    user.Names,
-                    user.LastName,
-                    user.Gender,
-                    user.Birthdate
-                },
-                commandType: CommandType.StoredProcedure));
+                    throw new UniqueConstraintException("El usuario " + user.DocumentNumber + " ya se encuentra registrado.", ex);
+                }
+                else
+                {
+                    throw ex;
+                }
+            }
         }
 
         public Task<int> Execute()

@@ -19,6 +19,7 @@ builder.Services.AddSingleton(serviceProvider =>
     return new SqlConnectionFactory(connectionString);
 });
 builder.Services.AddTransient<IFamilyGroupService, FamilyGroupService>();
+builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<ISpGetFamilyGroup, SpGetFamilyGroup>();
 builder.Services.AddTransient<ISpGetUser, SpGetUser>();
 builder.Services.AddTransient<ISpInsertUser, SpInsertUser>();
