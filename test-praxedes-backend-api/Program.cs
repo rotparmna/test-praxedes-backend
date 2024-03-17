@@ -41,6 +41,7 @@ builder.Services.AddSwaggerGen(options =>
             }
         }
     });
+    options.OperationFilter<AuthorizeCheckOperationFilter>();
 
 });
 
