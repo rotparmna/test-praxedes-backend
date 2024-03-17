@@ -64,6 +64,12 @@ builder.Services.AddTransient<ISpUpdateUser, SpUpdateUser>();
 builder.Services.AddTransient<ISpInsertActivityApi, SpInsertActivityApi>();
 builder.Services.AddTransient<ISpUpdateActivityApi, SpUpdateActivityApi>();
 builder.Services.AddTransient<IActivityApiService, ActivityApiService>();
+builder.Services.AddTransient<IPostService, PostService>();
+builder.Services.AddTransient<ISpInsertPost, SpInsertPost>();
+builder.Services.AddTransient<ISpUpdatePost, SpUpdatePost>();
+builder.Services.AddTransient<ISpDeletePost, SpDeletePost>();
+builder.Services.AddTransient<ISpGetPostById, SpGetPostById>();
+builder.Services.AddTransient<ISpGetPosts, SpGetPosts>();
 
 builder.Services.AddAuthentication("Bearer")
             .AddJwtBearer("Bearer", options =>
