@@ -5,6 +5,8 @@ VisualStudioVersion = 25.0.1706.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test-praxedes-backend-api", "test-praxedes-backend-api\test-praxedes-backend-api.csproj", "{F4817D37-1634-4C74-AE9A-A90F562EF238}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer", "IdentityServer.API\IdentityServer.csproj", "{741B83AC-B47D-4FC1-A00B-962C6DC04366}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{F4817D37-1634-4C74-AE9A-A90F562EF238}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4817D37-1634-4C74-AE9A-A90F562EF238}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4817D37-1634-4C74-AE9A-A90F562EF238}.Release|Any CPU.Build.0 = Release|Any CPU
+		{741B83AC-B47D-4FC1-A00B-962C6DC04366}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{741B83AC-B47D-4FC1-A00B-962C6DC04366}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{741B83AC-B47D-4FC1-A00B-962C6DC04366}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{741B83AC-B47D-4FC1-A00B-962C6DC04366}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

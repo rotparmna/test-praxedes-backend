@@ -1,4 +1,6 @@
-﻿using test_praxedes_backend_api.Contracts;
+﻿using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using test_praxedes_backend_api.Contracts;
 using test_praxedes_backend_api.Filters;
 using test_praxedes_backend_api.Infraestructure;
 using test_praxedes_backend_api.Services;
@@ -14,7 +16,33 @@ builder.Services.AddControllers(options =>
 });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Test Praxedes Api",
+        Version = "v1",
+        Description = "Test backend Praxedes Api"
+    });
+
+    options.AddSecurityDefinition("oath2ClientCredentials", new OpenApiSecurityScheme
+    {
+        Type = SecuritySchemeType.OAuth2,
+        Flows = new OpenApiOAuthFlows()
+        {
+            ClientCredentials = new OpenApiOAuthFlow
+            {
+                TokenUrl = new Uri($"{builder.Configuration.GetValue<string>("IdentityUrl")}/connect/token"),
+                Scopes = new Dictionary<string, string>
+                        {
+                            { "PraxedesBackendUser", "Praxedes Backend User" },
+                            { "PraxedesBackendPost", "Praxedes Backend Post"}
+                        }
+            }
+        }
+    });
+
+});
 
 builder.Services.AddSingleton(serviceProvider =>
 {
@@ -37,6 +65,25 @@ builder.Services.AddTransient<ISpInsertActivityApi, SpInsertActivityApi>();
 builder.Services.AddTransient<ISpUpdateActivityApi, SpUpdateActivityApi>();
 builder.Services.AddTransient<IActivityApiService, ActivityApiService>();
 
+builder.Services.AddAuthentication("Bearer")
+            .AddJwtBearer("Bearer", options =>
+            {
+                options.Authority = builder.Configuration.GetValue<string>("IdentityUrl");
+                options.Audience = "PraxedesBackendUser";
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateAudience = false
+                };
+            });
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("ApiScope", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+        policy.RequireClaim("scope", "PraxedesBackendUser");
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -48,9 +95,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapControllers().RequireAuthorization("ApiScope");
 
 app.Run();
-

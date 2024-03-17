@@ -1,0 +1,15 @@
+﻿global using IdentityServer4.Models;
+global using IdentityServer4.Services;
+global using IdentityServer4.Validation;
+global using Microsoft.AspNetCore.Builder;
+global using Microsoft.AspNetCore.Hosting;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Hosting;
+global using Microsoft.Extensions.Logging;
+global using Serilog;
+global using Serilog.Events;
+global using Serilog.Sinks.SystemConsole.Themes;
+global using System;
+global using System.Collections.Generic;
+global using System.Linq;
+global using System.Threading.Tasks;
