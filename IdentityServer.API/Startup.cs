@@ -29,7 +29,7 @@ public class Startup
             var logger = container.GetRequiredService<ILogger<DefaultCorsPolicyService>>();
             return new DefaultCorsPolicyService(logger)
             {
-                AllowedOrigins = { "https://localhost:7072" }
+                AllowedOrigins = { "https://localhost:7137" }
             };
         });
 

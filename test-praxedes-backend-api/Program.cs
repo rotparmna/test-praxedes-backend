@@ -14,6 +14,14 @@ builder.Services.AddControllers(options =>
     options.Filters.Add(typeof(LogFilter));
     options.Filters.Add(typeof(HttpGlobalExceptionFilter));
 });
+builder.Services.AddCors(options => {
+     options.AddPolicy("CorsPolicy",
+         builder => builder
+         .SetIsOriginAllowed((host) => true)
+         .AllowAnyMethod()
+         .AllowAnyHeader()
+         .AllowCredentials());
+ });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
