@@ -32,8 +32,6 @@ public class Startup
                 AllowedOrigins = { "https://localhost:7137" }
             };
         });
-
-        
     }
 
     public void Configure(IApplicationBuilder app)
