@@ -7,6 +7,8 @@ namespace test_praxedes_backend_api.Services
 {
     public class UserService : IUserService
 	{
+        private const string MESSAGE_ERROR = "Se intentó crear un usuario con un numero de documento existente, número de documento ";
+        private const string MESSAGE_FATAL_ERROR = "Error inesperado en la creación del usuario, número de documento ";
         private readonly ISpGetUserById spGetUserById;
         private readonly ISpGetUsers spGetUsers;
         private readonly ISpInsertUser spInsertUser;
@@ -38,12 +40,12 @@ namespace test_praxedes_backend_api.Services
             }
             catch(UniqueConstraintException ex)
             {
-                logger.LogError(ex, "Se intentó crear un usuario con un numero de documento existente, número de documento " + user.DocumentNumber);
+                logger.LogError(ex, MESSAGE_ERROR + user.DocumentNumber);
                 return false;
             }
             catch(SqlException sqlEx)
             {
-                logger.LogError(sqlEx, "Error inesperado en la creación del usuario, número de documento " + user.DocumentNumber);
+                logger.LogError(sqlEx, MESSAGE_FATAL_ERROR + user.DocumentNumber);
                 return false;
             }
         }
