@@ -1,6 +1,4 @@
-﻿using Castle.DynamicProxy;
-using Microsoft.Extensions.DependencyInjection;
-using test_praxedes_backend_api.Contracts;
+﻿using test_praxedes_backend_api.Contracts;
 using test_praxedes_backend_api.Filters;
 using test_praxedes_backend_api.Infraestructure;
 using test_praxedes_backend_api.Services;
@@ -12,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add(typeof(LogFilter));
+    options.Filters.Add(typeof(HttpGlobalExceptionFilter));
 });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

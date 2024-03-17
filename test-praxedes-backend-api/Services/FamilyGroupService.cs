@@ -25,7 +25,7 @@ namespace test_praxedes_backend_api.Services
         {
             User userChild = await spGetUser.Execute(familyGroup.UserChild.DocumentNumber);
             if (!ExistUser(userChild))
-                userChild.UserId = await CreateUser(userChild);
+                userChild.UserId = await CreateUser(familyGroup.UserChild);
             
             familyGroup.UserChild = userChild;
             await CreateRelationship(familyGroup);
