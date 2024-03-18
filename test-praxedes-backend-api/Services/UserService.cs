@@ -1,4 +1,6 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using System.ComponentModel.DataAnnotations;
+using FluentValidation;
+using Microsoft.Data.SqlClient;
 using test_praxedes_backend_api.Contracts;
 using test_praxedes_backend_api.Exceptions;
 using test_praxedes_backend_api.Models;
@@ -15,13 +17,15 @@ namespace test_praxedes_backend_api.Services
         private readonly ISpDeleteUser spDeleteUser;
         private readonly ISpUpdateUser spUpdateUser;
         private readonly ILogger<UserService> logger;
+        private readonly IValidator<User> validator;
 
         public UserService(ISpGetUserById spGetUserById,
             ISpGetUsers spGetUsers,
             ISpInsertUser spInsertUser,
             ISpDeleteUser spDeleteUser,
             ISpUpdateUser spUpdateUser,
-            ILogger<UserService> logger)
+            ILogger<UserService> logger,
+            IValidator<User> validator)
 		{
             this.spGetUserById = spGetUserById;
             this.spGetUsers = spGetUsers;
@@ -29,10 +33,18 @@ namespace test_praxedes_backend_api.Services
             this.spDeleteUser = spDeleteUser;
             this.spUpdateUser = spUpdateUser;
             this.logger = logger;
+            this.validator = validator;
         }
 
         public async Task<bool> CreateUser(User user)
         {
+            var validationResult = await validator.ValidateAsync(user);
+            if (!validationResult.IsValid)
+            {
+                var exception = new ValidatorException("Have a problem with input validations.");
+                validationResult.Errors.ForEach(x => exception.DataError.Add(x.ErrorMessage));
+                throw exception;
+            }
             try
             {
                 await spInsertUser.Execute(user);

@@ -1,7 +1,9 @@
 ﻿using System.Net;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using test_praxedes_backend_api.Contracts;
 using test_praxedes_backend_api.Dto;
+using test_praxedes_backend_api.Exceptions;
 
 namespace test_praxedes_backend_api.Filters
 {
@@ -26,16 +28,20 @@ namespace test_praxedes_backend_api.Filters
                 context.Exception,
                 context.Exception.Message);
 
-            var json = new JsonErrorResponse
+            if (context.Exception.GetType() == typeof(ValidatorException))
             {
-                Messages = new[] { "An error ocurred." }
-            };
-
-            if (env.IsDevelopment())
+                ManageValidatorException(context);
+            }
+            else
             {
-                json.DeveloperMessage = context.Exception.Message;
+                ManageInternalServerError(context);
             }
 
+            CreateActivity(context);
+        }
+
+        private void CreateActivity(ExceptionContext context)
+        {
             activityApiService.Create(new Models.ActivityApi()
             {
                 IdActivityApi = context.HttpContext.TraceIdentifier,
@@ -45,9 +51,36 @@ namespace test_praxedes_backend_api.Filters
                 Exception = context.Exception.Message,
                 HttpStatusCode = ((int)HttpStatusCode.InternalServerError).ToString()
             }).Wait();
+        }
+
+        private void ManageInternalServerError(ExceptionContext context)
+        {
+            var json = new JsonErrorResponse
+            {
+                Messages = new[] { "An error ocurred." }
+            };
+
+            if (env.IsDevelopment())
+                json.DeveloperMessage = context.Exception.Message;
 
             context.Result = new InternalServerErrorObjectResult(json);
             context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+        }
+
+        private static void ManageValidatorException(ExceptionContext context)
+        {
+            var problemDetails = new ValidationProblemDetails()
+            {
+                Type = "Data",
+                Detail = context.Exception.Message,
+                Title = null
+            };
+
+            problemDetails.Errors.Add("Validations",
+                ((IDataErrorException)context.Exception).DataError.ToArray());
+
+            context.Result = new BadRequestObjectResult(problemDetails);
+            context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
         }
     }
 }

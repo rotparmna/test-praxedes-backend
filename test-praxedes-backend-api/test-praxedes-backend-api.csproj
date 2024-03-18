@@ -27,6 +27,9 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.17" />
     <PackageReference Include="Z.Dapper.Plus" Version="7.3.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="FluentValidation" Version="11.9.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,6 +40,7 @@
     <None Remove="Infraestructure\" />
     <None Remove="Exceptions\" />
     <None Remove="Filters\" />
+    <None Remove="Models\Validators\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Dto\" />
@@ -46,5 +50,7 @@
     <Folder Include="Infraestructure\" />
     <Folder Include="Exceptions\" />
     <Folder Include="Filters\" />
+    <Folder Include="Models\Validators\" />
+    <Folder Include="Exceptions\" />
   </ItemGroup>
 </Project>

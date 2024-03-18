@@ -1,5 +1,4 @@
-﻿using System;
-namespace test_praxedes_backend_api.Dto
+﻿namespace test_praxedes_backend_api.Dto
 {
 	public class UserDto
 	{

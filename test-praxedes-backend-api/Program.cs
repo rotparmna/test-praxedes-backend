@@ -1,9 +1,11 @@
-﻿using System.Configuration;
+﻿using FluentValidation;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using test_praxedes_backend_api.Contracts;
 using test_praxedes_backend_api.Filters;
 using test_praxedes_backend_api.Infraestructure;
+using test_praxedes_backend_api.Models;
+using test_praxedes_backend_api.Models.Validators;
 using test_praxedes_backend_api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -63,7 +65,7 @@ builder.Services.AddSingleton(serviceProvider =>
 });
 builder.Services.AddTransient<IFamilyGroupService, FamilyGroupService>();
 builder.Services.AddTransient<IUserService, UserService>();
-builder.Services.AddTransient<ISpGetFamilyGroup, SpGetFamilyGroup>();
+builder.Services.AddTransient<ISpGetFamilyGroup, test_praxedes_backend_api.Infraestructure.SpGetFamilyGroup>();
 builder.Services.AddTransient<ISpGetUser, SpGetUser>();
 builder.Services.AddTransient<ISpInsertUser, SpInsertUser>();
 builder.Services.AddTransient<ISpInsertUserRelationship, SpInsertUserRelationship>();
@@ -88,6 +90,7 @@ builder.Services.AddTransient<ISpGetCommentById, SpGetCommentById>();
 builder.Services.AddTransient<ISpGetComments, SpGetComments>();
 builder.Services.AddTransient<ISpGetCommentsByIdPost, SpGetCommentsByIdPost>();
 builder.Services.AddTransient<IInsertBulkPostComment, InsertBulkPostComment>();
+builder.Services.AddScoped<IValidator<User>, UserValidator>();
 
 builder.Services.AddHttpClient<IJsonPlaceholderService, JsonPlaceholderService>(client =>
 {
