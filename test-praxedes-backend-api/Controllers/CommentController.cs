@@ -82,11 +82,11 @@ namespace test_praxedes_backend_api.Controllers
         }
 
         [HttpDelete]
-        public async Task<IResult> DeleteComment(int? idPost)
+        public async Task<IResult> DeleteComment(int? idComment)
         {
-            if (!idPost.HasValue)
+            if (!idComment.HasValue)
                 return Results.BadRequest();
-            await commentService.DeleteComment(idPost.Value);
+            await commentService.DeleteComment(idComment.Value);
             return Results.Ok();
         }
     }

@@ -15,7 +15,7 @@ namespace test_praxedes_backend_api.Infraestructure
 
         public async Task Execute(int input)
         {
-            await connection.Create().ExecuteAsync("spDeletepost",
+            await connection.Create().ExecuteAsync("spDeletePost",
                 new
                 {
                     IdPost = input

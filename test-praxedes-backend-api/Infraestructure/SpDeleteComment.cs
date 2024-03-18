@@ -1,28 +1,25 @@
-﻿using Dapper;
+﻿using System;
+using Dapper;
 using System.Data;
 using test_praxedes_backend_api.Contracts;
-using test_praxedes_backend_api.Models;
 
 namespace test_praxedes_backend_api.Infraestructure
 {
-    public class SpUpdatePost : ISpUpdatePost
+    public class SpDeleteComment : ISpDeleteComment
 	{
         private readonly SqlConnectionFactory connection;
 
-        public SpUpdatePost(SqlConnectionFactory connection)
+        public SpDeleteComment(SqlConnectionFactory connection)
         {
             this.connection = connection;
         }
 
-        public async Task Execute(Post input)
+        public async Task Execute(int input)
         {
-            await connection.Create().ExecuteAsync("spUpdatePost",
+            await connection.Create().ExecuteAsync("spDeleteComment",
                 new
                 {
-                    input.IdPost,
-                    input.IdUser,
-                    input.Title,
-                    input.Body
+                    IdComment = input
                 },
                 commandType: CommandType.StoredProcedure);
         }

@@ -79,6 +79,13 @@ builder.Services.AddTransient<ISpUpdatePost, SpUpdatePost>();
 builder.Services.AddTransient<ISpDeletePost, SpDeletePost>();
 builder.Services.AddTransient<ISpGetPostById, SpGetPostById>();
 builder.Services.AddTransient<ISpGetPosts, SpGetPosts>();
+builder.Services.AddTransient<ICommentService, CommentService>();
+builder.Services.AddTransient<ISpInsertComment, SpInsertComment>();
+builder.Services.AddTransient<ISpUpdateComment, SpUpdateComment>();
+builder.Services.AddTransient<ISpDeleteComment, SpDeleteComment>();
+builder.Services.AddTransient<ISpGetCommentById, SpGetCommentById>();
+builder.Services.AddTransient<ISpGetComments, SpGetComments>();
+builder.Services.AddTransient<ISpGetCommentsByIdPost, SpGetCommentsByIdPost>();
 
 builder.Services.AddAuthentication("Bearer")
             .AddJwtBearer("Bearer", options =>
