@@ -15,6 +15,14 @@ namespace test_praxedes_backend_api.Controllers
 			this.postService = postService;
 		}
 
+        [HttpPost]
+        [Route("bulk")]
+        public async Task<IResult> Bulk()
+        {
+            await postService.Bulk();
+            return Results.Ok();
+        }
+
         [HttpGet]
         [Route("all")]
         public async Task<IResult> GetPosts()

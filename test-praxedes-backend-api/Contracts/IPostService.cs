@@ -9,6 +9,7 @@ namespace test_praxedes_backend_api.Contracts
 		Task CreatePost(Post post);
 		Task UpdatePost(Post post);
 		Task DeletePost(int idPost);
+		Task Bulk();
 	}
 }
 

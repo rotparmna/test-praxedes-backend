@@ -1,4 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using System.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using test_praxedes_backend_api.Contracts;
 using test_praxedes_backend_api.Filters;
@@ -86,6 +87,13 @@ builder.Services.AddTransient<ISpDeleteComment, SpDeleteComment>();
 builder.Services.AddTransient<ISpGetCommentById, SpGetCommentById>();
 builder.Services.AddTransient<ISpGetComments, SpGetComments>();
 builder.Services.AddTransient<ISpGetCommentsByIdPost, SpGetCommentsByIdPost>();
+builder.Services.AddTransient<IInsertBulkPostComment, InsertBulkPostComment>();
+
+builder.Services.AddHttpClient<IJsonPlaceholderService, JsonPlaceholderService>(client =>
+{
+    client.BaseAddress = new Uri(builder.Configuration.GetValue<string>("EndpointJsonPlaceholder"));
+    client.Timeout = TimeSpan.FromSeconds(3);
+});
 
 builder.Services.AddAuthentication("Bearer")
             .AddJwtBearer("Bearer", options =>
