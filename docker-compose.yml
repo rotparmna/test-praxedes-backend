@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  test-praxedes-backend-api:
+    image: ${DOCKER_REGISTRY-}testpraxedesbackendapi
+    build:
+      context: .
+      dockerfile: test-praxedes-backend-api/Dockerfile
