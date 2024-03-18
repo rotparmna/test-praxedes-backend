@@ -36,11 +36,14 @@ namespace test_praxedes_backend_api.Filters
                 json.DeveloperMessage = context.Exception.Message;
             }
 
-            activityApiService.Update(new Models.ActivityApi()
+            activityApiService.Create(new Models.ActivityApi()
             {
                 IdActivityApi = context.HttpContext.TraceIdentifier,
+                Resource = context.HttpContext.Request.PathBase,
+                Path = context.HttpContext.Request.Path,
+                Method = context.HttpContext.Request.Method,
                 Exception = context.Exception.Message,
-                HttpStatusCode = context.HttpContext.Response.StatusCode.ToString()
+                HttpStatusCode = ((int)HttpStatusCode.InternalServerError).ToString()
             }).Wait();
 
             context.Result = new InternalServerErrorObjectResult(json);
