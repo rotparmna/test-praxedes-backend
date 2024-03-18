@@ -20,6 +20,11 @@ namespace test_praxedes_backend_api.Infraestructure
                 commandType: CommandType.StoredProcedure))
                 .ToList();
         }
+
+        public Task<List<Models.SpGetFamilyGroup>> Execute()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

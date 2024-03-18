@@ -2,8 +2,7 @@
 
 namespace test_praxedes_backend_api.Contracts
 {
-    public interface ISpGetFamilyGroup
+    public interface ISpGetFamilyGroup : IExecuteStoreProcedure<Task<List<SpGetFamilyGroup>>, int>
     {
-        Task<List<SpGetFamilyGroup>> Execute(int userId);
     }
 }

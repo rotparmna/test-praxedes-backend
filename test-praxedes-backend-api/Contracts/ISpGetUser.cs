@@ -1,7 +1,8 @@
-﻿namespace test_praxedes_backend_api.Contracts
+﻿using test_praxedes_backend_api.Models;
+
+namespace test_praxedes_backend_api.Contracts
 {
-    public interface ISpGetUser
+    public interface ISpGetUser : IExecuteStoreProcedure<Task<User>, string>
     {
-        Task<Models.User> Execute(string documentNumber);
     }
 }
