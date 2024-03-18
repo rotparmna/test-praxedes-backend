@@ -1,0 +1,376 @@
+{
+	"info": {
+		"_postman_id": "f9208847-24ab-469e-b3ad-098c98507edc",
+		"name": "test-praxedes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3599341"
+	},
+	"item": [
+		{
+			"name": "backend",
+			"item": [
+				{
+					"name": "get-user-all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7137/User/all",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7137",
+							"path": [
+								"User",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save-post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "IdPost",
+									"value": "11",
+									"type": "text"
+								},
+								{
+									"key": "IdUser",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "Title",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "Body",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://localhost:7137/Post",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7137",
+							"path": [
+								"Post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save-comment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "IdComment",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "IdPost",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "Email",
+									"value": "rotpar@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "Name",
+									"value": "Mike",
+									"type": "text"
+								},
+								{
+									"key": "Body",
+									"value": "hola2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://localhost:7137/Comment",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7137",
+							"path": [
+								"Comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-comments-by-post",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7137/Comment/getByPost?idPost=1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7137",
+							"path": [
+								"Comment",
+								"getByPost"
+							],
+							"query": [
+								{
+									"key": "idPost",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "bulk",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7137/Post/bulk",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7137",
+							"path": [
+								"Post",
+								"bulk"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "oauth2",
+				"oauth2": [
+					{
+						"key": "accessTokenUrl",
+						"value": "https://localhost:5001/connect/token",
+						"type": "string"
+					},
+					{
+						"key": "clientSecret",
+						"value": "secret",
+						"type": "string"
+					},
+					{
+						"key": "clientId",
+						"value": "client",
+						"type": "string"
+					},
+					{
+						"key": "grant_type",
+						"value": "client_credentials",
+						"type": "string"
+					},
+					{
+						"key": "tokenName",
+						"value": "praxedes-token",
+						"type": "string"
+					},
+					{
+						"key": "addTokenTo",
+						"value": "header",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "registro-inicial",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"navarro\", //nombre\n    \"apellido\": \"michael\", //apellido\n    \"doctoIdent\": \"72349188\", //documento de identidad\n    \"email\": \"rotpar@gmaill.com\", //correo electrónico (usuario)\n    \"clave\": \"123456\", //clave\n    \"cia\": \"10\" //para este campo siempre se debe enviar un 10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://pruebas.midasoft.co:5443/Apis_DLLO/Seleccion/api/SOL/RegistroInicialSolicitante",
+					"protocol": "https",
+					"host": [
+						"pruebas",
+						"midasoft",
+						"co"
+					],
+					"port": "5443",
+					"path": [
+						"Apis_DLLO",
+						"Seleccion",
+						"api",
+						"SOL",
+						"RegistroInicialSolicitante"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "autenticacion",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"password\": \"1234\", //contraseña del usuario\n    \"companyId\": \"10\", //para este campo siempre se debe enviar un 10\n    \"username\": \"rotpar@gmaill.com\", //correo electrónico (usuario)\n    \"desdeMs\": true //siempre se debe enviar true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://pruebas.midasoft.co:5443/Apis_DLLO/Security/api/SEG",
+					"protocol": "https",
+					"host": [
+						"pruebas",
+						"midasoft",
+						"co"
+					],
+					"port": "5443",
+					"path": [
+						"Apis_DLLO",
+						"Security",
+						"api",
+						"SEG"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "episodios",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://rickandmortyapi.com/api/episode",
+					"protocol": "https",
+					"host": [
+						"rickandmortyapi",
+						"com"
+					],
+					"path": [
+						"api",
+						"episode"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "personajes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://rickandmortyapi.com/api/character/1,2",
+					"protocol": "https",
+					"host": [
+						"rickandmortyapi",
+						"com"
+					],
+					"path": [
+						"api",
+						"character",
+						"1,2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "favorito",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://pruebas.midasoft.co:5443/Apis_DLLO/Seleccion/api/favoritos",
+					"protocol": "https",
+					"host": [
+						"pruebas",
+						"midasoft",
+						"co"
+					],
+					"port": "5443",
+					"path": [
+						"Apis_DLLO",
+						"Seleccion",
+						"api",
+						"favoritos"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
